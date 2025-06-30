@@ -5,11 +5,13 @@ import org.example.entities.UserInfo;
 import org.example.repository.RefreshTokenRepository;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class RefreshTokenService {
     @Autowired
     RefreshTokenRepository refreshTokenRepository;
@@ -18,7 +20,7 @@ public class RefreshTokenService {
     UserRepository userRepository;
 
     public RefreshToken createRefreshToken(String username){
-        UserInfo userInfoExtracted = userRepository.findByUsername(username);
+        UserInfo userInfoExtracted = userRepository.findByUserName(username);
         RefreshToken refreshToken = RefreshToken.builder()
                 .userInfo(userInfoExtracted)
                 .token(UUID.randomUUID().toString())

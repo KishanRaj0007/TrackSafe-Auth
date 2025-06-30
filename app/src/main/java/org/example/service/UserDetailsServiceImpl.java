@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     {
 
 //        log.debug("Entering in loadUserByUsername Method...");
-        UserInfo user = userRepository.findByUsername(username);
+        UserInfo user = userRepository.findByUserName(username);
         if(user == null){
 //            log.error("Username not found: " + username);
             throw new UsernameNotFoundException("could not found user..!!");
@@ -47,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public UserInfo checkIfUserAlreadyExist(UserInfoDto userInfoDto){
-        return userRepository.findByUsername(userInfoDto.getUserName());
+        return userRepository.findByUserName(userInfoDto.getUserName());
     }
 
     public Boolean signupUser(UserInfoDto userInfoDto){
