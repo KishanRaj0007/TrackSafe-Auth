@@ -79,6 +79,15 @@ JPA entities (`UserInfo`, `UserRole`, `RefreshToken`) are mapped to MySQL tables
 
 ---
 
+## How to Run?
+### Step 1
+- `./gradlew clean build -x test`
+- `./gradlew bootRun`
+This is start Tomcat at port 8080.
+![Tomcat Started](docs/tomcat.png)
+
+### Step 2: Test different handlers using Postman
+
 ## Summary
 
 TrackSafe Auth is a secure, stateless, and extensible authentication backend designed using modern Java and Spring Boot practices. Its modular structure, robust token handling, and clean database schema make it suitable for integration into scalable web or microservices-based applications.
