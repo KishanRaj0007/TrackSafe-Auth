@@ -1,4 +1,4 @@
-# TrackSafe Auth
+# TrackSafe Auth : Authentication Module for Expense Tracker
 
 ---
 
