@@ -50,23 +50,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userRepository.findByUserName(userInfoDto.getUserName());
     }
 
-    public Boolean signupUser(UserInfoDto userInfoDto){
+    public Boolean signupUser(UserInfoDto userInfoDto) {
         ValidationUtil.validateUserAttributes(userInfoDto);
-        UserInfo existingUser = checkIfUserAlreadyExist(userInfoDto);
 
-        if (Objects.nonNull(existingUser)) {
+        UserInfo existingUser = userRepository.findByUserName(userInfoDto.getUserName());
+
+        if (existingUser != null) {
             if (passwordEncoder.matches(userInfoDto.getPassword(), existingUser.getPassword())) {
                 log.info("User already exists and password matches. Skipping signup.");
                 return false;
             } else {
-                log.warn("User already exists but password does not match.");
                 throw new IllegalArgumentException("User already exists with different password.");
             }
         }
 
         String encodedPassword = passwordEncoder.encode(userInfoDto.getPassword());
         String userId = UUID.randomUUID().toString();
-        UserInfo newUser = new UserInfo(userId, userInfoDto.getUserName(), encodedPassword, new HashSet<>());
+
+        UserInfo newUser = new UserInfo();
+        newUser.setUserId(userId);
+        newUser.setUserName(userInfoDto.getUserName());
+        newUser.setPassword(encodedPassword);
+        newUser.setRoles(new HashSet<>()); // or assign default role if needed
+
         userRepository.save(newUser);
         log.info("User registered successfully.");
         return true;
