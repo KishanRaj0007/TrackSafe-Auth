@@ -81,7 +81,7 @@ JPA entities (`UserInfo`, `UserRole`, `RefreshToken`) are mapped to MySQL tables
 
 ## How to Run?
 ### Step 1
-- `./gradlew clean build -x test`
+- `./gradlew clean build`
 - `./gradlew bootRun`
 - This will start Tomcat at port 8080.
 ![Tomcat Started](docs/tomcat.png)
